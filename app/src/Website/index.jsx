@@ -3,7 +3,7 @@ import {withRouter, Switch, Route} from 'react-router-dom'
 import {connect} from 'react-redux';
 import Content from './Content';
 import Content1 from './Content1';
-import {Paths} from '../../js/constants';
+import {Paths} from '../js/constants';
 
 class Website extends Component {
 

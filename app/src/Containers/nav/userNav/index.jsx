@@ -14,6 +14,9 @@ import StarBorder from '@material-ui/icons/StarBorder';
 import Collapse from '@material-ui/core/Collapse';
 import {withRouter} from 'react-router-dom'
 import {Paths} from '../../../js/constants';
+import IconButton from '@material-ui/core/IconButton';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const styles = theme => ({
   root: {
@@ -24,6 +27,14 @@ const styles = theme => ({
    nested: {
      paddingLeft: theme.spacing.unit * 4,
    },
+   drawerHeader: {
+     display: 'flex',
+     alignItems: 'center',
+     justifyContent: 'flex-end',
+     padding: '0 8px',
+     ...theme.mixins.toolbar,
+   },
+   direction :'rtl',
 });
 
 class UserNav extends PureComponent {
@@ -36,11 +47,18 @@ class UserNav extends PureComponent {
   handleClick = () => {
     this.setState({ open: !this.state.open });
   };
+
   render (){
-  const { classes,toggleDrawer,history, match } = this.props;
-  console.log(match)
+  const { classes,toggleDrawer,history, match,handleDrawerClose } = this.props;
+
   return (
     <div className={classes.root}>
+      <div className={classes.drawerHeader}>
+   <IconButton onClick={handleDrawerClose}>
+     <ChevronLeftIcon />
+   </IconButton>
+ </div>
+ <Divider />
       <List component="nav">
         <ListItem button onClick={()=>{toggleDrawer('right', false)
         history.push(`${Paths.dashboard}`)}}>

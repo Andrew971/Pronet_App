@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
-import Home from '../../Modules/Home';
-import Dashboard from '../../Modules/Dashboard';
-import Website from '../../Modules/Website';
+import Home from '../../Home';
+import Dashboard from '../../Dashboard';
+import Website from '../../Website';
 import {withRouter, Switch, Route} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {Paths} from '../../js/constants';
+import Main from '../../Components/Main';
 
 class MainContainer extends Component {
 
   render() {
-    const {match}=this.props
-    console.log(this.props)
-    return (<main>
+    const {match,menuDisplay}=this.props
+
+    return (<Main menuDisplay={menuDisplay}>
 
       <Switch>
         <Route exact path={match.url} render={(routeProps) =>
@@ -21,12 +22,14 @@ class MainContainer extends Component {
         <Route strict path={match.url+Paths.website} render={(routeProps) =>
             <Website {...routeProps}/>}/>
       </Switch>
-    </main>)
+    </Main>)
   }
 }
 const mapStateToProps = (state) => {
 
-  return {}
+  return {
+    menuDisplay: state.AppBar.menuDisplay
+  }
 
 }
 

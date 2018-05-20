@@ -1,10 +1,13 @@
-.App {
-  text-align: center;
+html{
+  // box-sizing: border-box;
+}
+body{
+  padding:0;
+  margin:0;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.App {
+  text-align: center;
 }
 
 .App-header {

@@ -1,9 +1,8 @@
 import React, {PureComponent} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {Provider} from 'react-redux'
-import configureStore from '../Modules'
+import configureStore from './store'
 import Containers from '../Containers';
-import {rootUrl} from './constants';
 
 const store = configureStore()
 
