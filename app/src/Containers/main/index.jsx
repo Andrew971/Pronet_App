@@ -10,9 +10,9 @@ import Main from '../../Components/Main';
 class MainContainer extends Component {
 
   render() {
-    const {match,menuDisplay}=this.props
+    const {match,menuDisplay,RightDrawerDisplay}=this.props
 
-    return (<Main menuDisplay={menuDisplay}>
+    return (<Main menuDisplay={menuDisplay} RightDrawerDisplay={RightDrawerDisplay}>
 
       <Switch>
         <Route exact path={match.url} render={(routeProps) =>
@@ -28,7 +28,8 @@ class MainContainer extends Component {
 const mapStateToProps = (state) => {
 
   return {
-    menuDisplay: state.AppBar.menuDisplay
+    menuDisplay: state.AppBar.menuDisplay,
+    RightDrawerDisplay: state.AppBar.RightDrawerDisplay
   }
 
 }

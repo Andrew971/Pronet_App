@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export default styled.div`
 height: 100%; /* 100% Full-height */
-width: ${props=>(props.menuDisplay?"20rem":"0")};
+width: ${props=>(props.RightDrawerDisplay?"20rem":"0")};
 transition: width 15.15s ease-in;
 position: fixed; /* Stay in place */
 z-index: 1; /* Stay on top */
 top: 0; /* Stay at the top */
-left: 0;
+right: 0;
 background-color: rgb(247,247,247); /* Fallback color */
 overflow-x: hidden; /* Disable horizontal scroll */
 padding-top: 60px; /* Place content 60px from the top */

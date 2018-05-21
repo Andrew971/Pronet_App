@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
-import {AppBarAction} from './reducer';
 import Appbar from '../Components/Appbar';
 import IconButton from '../Components/iconButton';
 import Portal from '../js/portal'
 import MenuContainer from './Menu'
+import RightDrawer from './RighDrawer'
 import Hamburger from '../Components/svg/hamburger'
 
 class AppBar extends Component {
@@ -17,11 +17,11 @@ class AppBar extends Component {
   }
 
   render() {
-    const {dispatch, menuDisplay} = this.props
+    const {dispatch, menuDisplay,RightDrawerDisplay} = this.props
 
-    return (<Appbar menuDisplay={menuDisplay}>
+    return (<Appbar menuDisplay={menuDisplay} RightDrawerDisplay={RightDrawerDisplay}>
       <IconButton onClick={() => {
-          dispatch(AppBarAction({type: "MENU_DISPLAY"}))
+          dispatch({type: "MENU_DISPLAY"})
         }}>
         <Hamburger size="1.5em"/>
       </IconButton>
@@ -31,12 +31,20 @@ class AppBar extends Component {
             <MenuContainer/>
           </Portal>
       }
+      {
+        RightDrawerDisplay && <Portal>
+            <RightDrawer/>
+          </Portal>
+      }
     </Appbar>);
   }
 }
 
 const mapStateToProps = (state) => {
-  return {menuDisplay: state.AppBar.menuDisplay};
+  return {
+    menuDisplay: state.AppBar.menuDisplay,
+    RightDrawerDisplay: state.AppBar.RightDrawerDisplay
+  };
 };
 
 export default withRouter(connect(mapStateToProps)(AppBar));
