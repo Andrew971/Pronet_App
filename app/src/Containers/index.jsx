@@ -5,6 +5,7 @@ import NavContainer from './nav';
 import Main from './main';
 import Swipe from '../js/HOC/Swipe';
 
+
 class Containers extends Component {
 
 
@@ -14,12 +15,16 @@ class Containers extends Component {
     return (<Swipe>
       <NavContainer/>
       <Main/>
+
     </Swipe>);
   }
 }
 
 const mapStateToProps = (state) => {
-  return {menuDisplay: state.AppBar.menuDisplay};
+  return {
+    menuDisplay: state.AppBar.menuDisplay,
+    RightDrawerDisplay: state.AppBar.RightDrawerDisplay
+  };
 };
 
 export default connect(mapStateToProps)(Containers);

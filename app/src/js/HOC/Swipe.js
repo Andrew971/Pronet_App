@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Body from '../../Components/Container';
+import Container from '../../Components/SwipeContainer';
 
 class Swipe extends Component {
   constructor(props) {
@@ -89,9 +89,9 @@ class Swipe extends Component {
   render() {
     const {drawerDisplay, children} = this.props
 
-    return (<Body drawerDisplay={drawerDisplay} innerRef={self => this.body = self}>
+    return (<Container open={drawerDisplay} innerRef={self => this.body = self}>
       {children}
-    </Body>);
+    </Container>);
   }
 }
 

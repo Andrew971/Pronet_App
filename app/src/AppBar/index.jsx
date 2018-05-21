@@ -6,7 +6,7 @@ import IconButton from '../Components/iconButton';
 import Portal from '../js/portal'
 import MenuContainer from './Menu'
 import RightDrawer from './RighDrawer'
-import Hamburger from '../Components/svg/hamburger'
+import Hamburger from '../Components/Icon/hamburger'
 
 class AppBar extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class AppBar extends Component {
       <IconButton onClick={() => {
           dispatch({type: "MENU_DISPLAY"})
         }}>
-        <Hamburger size="1.5em"/>
+        <Hamburger />
       </IconButton>
       <h1>Pronet</h1>
       {

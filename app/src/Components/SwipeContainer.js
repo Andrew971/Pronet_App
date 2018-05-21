@@ -8,8 +8,8 @@ top: 0;
 width: 100%; /* Full width */
 height: 100vh; /* Full height */
 overflow: hidden;
-background-color: ${props=>(props.drawerDisplay?"rgba(0,0,0,0.6)":"0")};
-pointer-events: ${props=>(props.drawerDisplay?"none":"auto")};
+background-color: ${props=>(props.open?"rgba(0,0,0,0.6)":"0")};
+pointer-events: ${props=>(props.open?"none":"auto")};
 
 @media (min-width: 660px) {
 }

@@ -12,7 +12,7 @@ class MainContainer extends Component {
   render() {
     const {match,menuDisplay,RightDrawerDisplay}=this.props
 
-    return (<Main menuDisplay={menuDisplay} RightDrawerDisplay={RightDrawerDisplay}>
+    return (<Main left={menuDisplay} right={RightDrawerDisplay}>
 
       <Switch>
         <Route exact path={match.url} render={(routeProps) =>

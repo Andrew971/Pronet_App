@@ -62,6 +62,7 @@ class SimpleDialog extends React.Component {
           </List>
         </div>
       </Dialog>
+
     );
   }
 }
@@ -93,6 +94,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
+
         <Typography variant="subheading">Selected: {this.state.selectedValue}</Typography>
         <br />
         <Button onClick={this.handleClickOpen}>Open simple dialog in Home</Button>
