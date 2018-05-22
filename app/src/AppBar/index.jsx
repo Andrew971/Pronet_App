@@ -17,22 +17,23 @@ class AppBar extends Component {
   }
 
   render() {
-    const {dispatch, menuDisplay,RightDrawerDisplay} = this.props
+    const {dispatch, drawerLeftDisplay,drawerRightDisplay} = this.props
 
-    return (<Appbar menuDisplay={menuDisplay} RightDrawerDisplay={RightDrawerDisplay}>
+    return (<Appbar isOpen={drawerLeftDisplay}>
       <IconButton onClick={() => {
-          dispatch({type: "MENU_DISPLAY"})
-        }}>
-        <Hamburger />
+          !drawerLeftDisplay && dispatch({type: "LEFT_DRAWER_DISPLAY"})
+          drawerLeftDisplay && dispatch({type: "LEFT_DRAWER_HIDE"})
+        }} primary>
+        <Hamburger open={drawerLeftDisplay}/>
       </IconButton>
       <h1>Pronet</h1>
       {
-        menuDisplay && <Portal>
+        drawerLeftDisplay && <Portal>
             <MenuContainer/>
           </Portal>
       }
       {
-        RightDrawerDisplay && <Portal>
+        drawerRightDisplay && <Portal>
             <RightDrawer/>
           </Portal>
       }
@@ -42,8 +43,8 @@ class AppBar extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    menuDisplay: state.AppBar.menuDisplay,
-    RightDrawerDisplay: state.AppBar.RightDrawerDisplay
+    drawerLeftDisplay: state.UI.drawerLeftDisplay,
+    drawerRightDisplay: state.UI.drawerRightDisplay
   };
 };
 

@@ -2,34 +2,84 @@ import React, {Component,Fragment} from 'react';
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
 import Table from './Table';
-import EnhancedTableToolbar from './TableHead';
-import Paper from '@material-ui/core/Paper';
-import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+import TableToolbar from './TableHead';
+import Paper from '../../Components/Paper';
 
-const styles = theme => ({
-  root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
+const data = [
+  {
+    id:0,
+    name:"test",
+    calories:1,
+    fat:1,
+    carbs:1,
+    protein:1,
+  },
+  {
+    id:1,
+    name:"test",
+    calories:1,
+    fat:1,
+    carbs:1,
+    protein:1,
+  },
+  {
+    id:2,
+    name:"test",
+    calories:1,
+    fat:1,
+    carbs:1,
+    protein:1,
+  },
+];
+
+class Content extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      selected: [],
+    };
   }
-});
-class content1 extends Component {
+
+  handleSelectAllClick = (event) => {
+    const checked= event.target.checked;
+     (checked)&& this.setState({ selected: data.map(n => n.id) });
+     (!checked)&&this.setState({ selected: [] });
+   }
+
+  handleClick = (id) => {
+
+    const { selected } = this.state;
+    const selectedIndex = selected.indexOf(id);
+    let newSelected = [];
+      newSelected = (selectedIndex === -1)
+      ? newSelected = [...selected,id]
+      :(selectedIndex === 0)
+      ? newSelected.concat(selected.slice(1))
+      :(selectedIndex === selected.length - 1)
+      ?newSelected.concat(selected.slice(0, -1))
+      :(selectedIndex > 0)
+      ? newSelected.concat(selected.slice(0, selectedIndex),selected.slice(selectedIndex + 1),
+      ):'';
+
+    this.setState({ selected: newSelected });
+  };
 
   render() {
-    const {classes} = this.props;
-console.log(this.props)
+    const {selected}=this.state
     return (<Fragment>
-      <Paper className={classes.root}>
-      <EnhancedTableToolbar numSelected={0}/>
-      <Table classes={classes}/>
+      <Paper>
+      <TableToolbar numSelected={selected.length}/>
+      <Table  handleClick={this.handleClick} selected={selected}
+        numSelected={selected.length}
+        rowCount={data.length}
+        data={data}
+        onSelectAllClick={this.handleSelectAllClick} />
     </Paper>
   </Fragment>)
   }
 }
 
-Table.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+
 
 const mapStateToProps = (state) => {
 
@@ -37,4 +87,4 @@ const mapStateToProps = (state) => {
 
 }
 
-export default withStyles(styles)(withRouter(connect(mapStateToProps)(content1)));
+export default withRouter(connect(mapStateToProps)(Content));

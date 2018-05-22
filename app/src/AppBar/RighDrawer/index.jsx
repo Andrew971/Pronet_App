@@ -1,14 +1,14 @@
 import React, { Component,Fragment } from 'react';
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
-import Wrapper from '../../Components/RightDrawer/Wrapper'
-import Menu from '../../Components/RightDrawer/Content'
-import MenuItems from '../../Components/RightDrawer/MenuItems'
-import MenuTypo from '../../Components/RightDrawer/MenuTypo'
+import Drawer from '../../Components/Drawer/Drawer'
+import Menu from '../../Components/Drawer/Content'
+import MenuItems from '../../Components/Drawer/MenuItems'
+import MenuTypo from '../../Components/Drawer/MenuTypo'
 import {Nav} from '../../js/constants';
 
 
-export class RightDrawer extends Component {
+export class MenuContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,10 +20,10 @@ export class RightDrawer extends Component {
   };
 
   render() {
-    const { RightDrawerDisplay,history,match } = this.props
+    const { drawerRightDisplay,history,match } = this.props
     const { showSubMenu } = this.state
     return (
-      <Wrapper RightDrawerDisplay={RightDrawerDisplay}>
+      <Drawer isOpen={drawerRightDisplay} direction="right">
 <Menu>
   {Nav.map(item=>
     <Fragment key={item.key}>
@@ -57,7 +57,7 @@ export class RightDrawer extends Component {
 </Menu>
 
 
-</Wrapper>
+</Drawer>
   );
   }
 
@@ -67,8 +67,8 @@ export class RightDrawer extends Component {
 const mapStateToProps = (state) => {
 
   return {
-    RightDrawerDisplay: state.AppBar.RightDrawerDisplay
+    drawerRightDisplay: state.UI.drawerRightDisplay
   }
 
 }
-export default withRouter(connect(mapStateToProps)(RightDrawer));
+export default withRouter(connect(mapStateToProps)(MenuContainer));

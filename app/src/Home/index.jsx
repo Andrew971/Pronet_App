@@ -1,5 +1,3 @@
-/* eslint-disable react/no-multi-comp */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -15,6 +13,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
 import blue from '@material-ui/core/colors/blue';
+import IconButton from '../Components/iconButton';
+import Hamburger from '../Components/Icon/hamburger'
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 const styles = {
@@ -94,8 +94,10 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-
-        <Typography variant="subheading">Selected: {this.state.selectedValue}</Typography>
+        <IconButton>
+          <Hamburger color="black"/>
+        </IconButton>
+                <Typography variant="subheading">Selected: {this.state.selectedValue}</Typography>
         <br />
         <Button onClick={this.handleClickOpen}>Open simple dialog in Home</Button>
         <SimpleDialogWrapped

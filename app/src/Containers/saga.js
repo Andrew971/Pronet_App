@@ -1,6 +1,6 @@
 import {takeLatest,all, call,put} from "redux-saga/effects";
 import axios from "axios";
-import {apiURL} from "../../js/api";
+import {apiURL} from "../../../js/api";
 
 
 export function* Worker(action) {

@@ -1,10 +1,10 @@
 import React, { Component,Fragment } from 'react';
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
-import Wrapper from '../../Components/Menu/Wrapper'
-import Menu from '../../Components/Menu/Content'
-import MenuItems from '../../Components/Menu/MenuItems'
-import MenuTypo from '../../Components/Menu/MenuTypo'
+import Drawer from '../../Components/Drawer/Drawer'
+import Menu from '../../Components/Drawer/Content'
+import MenuItems from '../../Components/Drawer/MenuItems'
+import MenuTypo from '../../Components/Drawer/MenuTypo'
 import {Nav} from '../../js/constants';
 
 
@@ -20,10 +20,10 @@ export class MenuContainer extends Component {
   };
 
   render() {
-    const { menuDisplay,history,match } = this.props
+    const { drawerLeftDisplay,history,match } = this.props
     const { showSubMenu } = this.state
     return (
-      <Wrapper menuDisplay={menuDisplay}>
+      <Drawer isOpen={drawerLeftDisplay}>
 <Menu>
   {Nav.map(item=>
     <Fragment key={item.key}>
@@ -57,7 +57,7 @@ export class MenuContainer extends Component {
 </Menu>
 
 
-</Wrapper>
+</Drawer>
   );
   }
 
@@ -67,7 +67,7 @@ export class MenuContainer extends Component {
 const mapStateToProps = (state) => {
 
   return {
-    menuDisplay: state.AppBar.menuDisplay
+    drawerLeftDisplay: state.UI.drawerLeftDisplay
   }
 
 }

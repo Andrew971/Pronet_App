@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import './styles.css'
 import NavContainer from './nav';
 import Main from './main';
-import Swipe from '../js/HOC/Swipe';
+import Swipe from '../Components/Swipe';
 
 
 class Containers extends Component {
