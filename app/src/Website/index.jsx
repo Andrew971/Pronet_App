@@ -9,7 +9,7 @@ class Website extends Component {
 
   render() {
     const {match} = this.props
-    console.log(this.props)
+
     return (<Fragment>
 
       <Switch>

@@ -128,7 +128,6 @@ class Checkbox extends PureComponent {
 
     !parent&&this.setState({isOpen:false})
 
-    console.log(parent);
   }
 iconToggle=()=>this.setState(prevState=>{return{isOpen:!prevState.isOpen}})
   render() {
