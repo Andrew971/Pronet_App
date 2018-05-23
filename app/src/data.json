@@ -1,0 +1,79 @@
+{
+  "contentType": [{
+      "name": "Header",
+      "description": "Header",
+      "field": [{
+        "name": "",
+        "description": "",
+        "Placement": ""
+      }]
+    },
+    {
+      "name": "Section",
+      "description": "section",
+      "field": [{
+        "name": "",
+        "description": "",
+        "Placement": ""
+      }]
+    }
+  ],
+  "ContentOption": [{
+      "name": "Button",
+      "description": "",
+      "field": [{
+        "name": "",
+        "text": "",
+        "url": "",
+        "order": 1
+      }]
+    },
+    {
+      "name": "Background",
+      "description": "",
+      "field": [{
+        "name": "",
+        "text": "",
+        "color": "",
+        "url": "",
+        "order": 1
+      }]
+    },
+    {
+      "name": "Image",
+      "description": "",
+      "field": [{
+        "name": "",
+        "url": "",
+        "order": 1
+      }]
+    },
+    {
+      "name": "Title",
+      "description": "",
+      "field": [{
+        "name": "",
+        "text": "",
+        "order": 1
+      }]
+    },
+    {
+      "name": "Sub-Title",
+      "description": "",
+      "field": [{
+        "name": "",
+        "text": "",
+        "order": 1
+      }]
+    },
+    {
+      "name": "Paragraph",
+      "description": "",
+      "field": [{
+        "name": "",
+        "text": "",
+        "order": 1
+      }]
+    }
+  ]
+}

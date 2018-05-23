@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Table from './Table';
 import TableToolbar from './TableHead';
 import Paper from '../../Components/Paper';
+// import Button from '../../Components/Button';
 import TableFooter from './TableFooter';
 let counter = 0;
 
@@ -86,6 +87,7 @@ class Content extends Component {
 
   render() {
     const {selected,page,rowsPerPage}=this.state
+    const {dispatch}=this.props
     return (<Fragment>
       <Paper>
       <TableToolbar numSelected={selected.length}/>
@@ -98,6 +100,8 @@ class Content extends Component {
       <TableFooter page={page} rowsPerPage={rowsPerPage} data={data}
 handleChangePage={this.handleChangePage} handleChangeRowsPerPage={this.handleChangeRowsPerPage}/>
     </Paper>
+    <button onClick={()=>{dispatch({type:'MODAL_SHOW'})}}>Create Content</button>
+
   </Fragment>)
   }
 }

@@ -4,11 +4,14 @@ import {connect} from 'react-redux';
 import Content from './Content';
 import Content1 from './Content1';
 import {Paths} from '../js/constants';
+import Portal from '../js/portal'
+import NewContent from './Content/NewContent';
 
 class Website extends Component {
 
   render() {
     const {match} = this.props
+    const {modalDisplay} = this.props
 
     return (<Fragment>
 
@@ -18,12 +21,19 @@ class Website extends Component {
         <Route path={`${Paths.websiteContent(match.url)}`} render={(routeProps) =>
             <Content {...routeProps}/>}/>
       </Switch>
+      {
+        modalDisplay && <Portal>
+            <NewContent/>
+          </Portal>
+      }
     </Fragment>)
   }
 }
 const mapStateToProps = (state) => {
 
-  return {}
+  return {
+    modalDisplay: state.UI.modalDisplay,
+  }
 
 }
 

@@ -1,8 +1,10 @@
 // Initial state of the feature
 const initialState = {
+  language:'fr',
   drawerDisplay:false,
   drawerLeftDisplay: false,
   drawerRightDisplay: false,
+  modalDisplay: false,
 };
 
 export function UIReducer(state = initialState, action) {
@@ -33,6 +35,16 @@ export function UIReducer(state = initialState, action) {
               drawerRightDisplay: action.payload,
               drawerDisplay: action.payload
           };
+      case 'MODAL_SHOW':
+          return  {
+              ...state,
+              modalDisplay: true,
+          };
+      case 'MODAL_HIDE':
+          return  {
+              ...state,
+              modalDisplay: false,
+          };
       default:
           return state;
   }
@@ -57,6 +69,14 @@ export function UIAction(data) {
           return  {
               type: data.type,
               payload: data.payload
+          };
+      case 'MODAL_SHOW':
+          return  {
+              type: data.type,
+          };
+      case 'MODAL_HIDE':
+          return  {
+              type: data.type,
           };
       default:
           return (console.log('no action with that name'));
