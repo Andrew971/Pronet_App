@@ -9,6 +9,7 @@
 
 # production
 # /app/build
+# /app/.env
 
 # misc
 .DS_Store
