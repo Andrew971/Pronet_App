@@ -10,5 +10,5 @@ font-size: 0.75rem;
 font-weight: 500;
 text-align: ${props=>(props.first?'left':'center')};
 flex-direction: row-reverse;
-
+cursor:${props=>(props.first?'pointer':'normal')};
 `;

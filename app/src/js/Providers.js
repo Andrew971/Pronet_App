@@ -4,13 +4,15 @@ import {Provider} from 'react-redux'
 import configureStore from './store'
 import Containers from '../Containers';
 
-const store = configureStore()
 
 export default class Providers extends PureComponent {
-
+  constructor(props) {
+      super(props)
+      this.store=configureStore()
+    }
   render() {
     return (
-      <Provider store={store}>
+      <Provider store={this.store}>
       <Router>
 <Route path="/" component={Containers} />
       </Router>

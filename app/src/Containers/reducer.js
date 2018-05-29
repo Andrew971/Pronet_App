@@ -1,6 +1,9 @@
+import theme from '../js/theme'
+
 // Initial state of the feature
 const initialState = {
   language:'fr',
+  Theme: theme.main,
   drawerDisplay:false,
   drawerLeftDisplay: false,
   drawerRightDisplay: false,

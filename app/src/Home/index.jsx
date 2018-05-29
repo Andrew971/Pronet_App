@@ -1,110 +1,37 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
-import PersonIcon from '@material-ui/icons/Person';
-import AddIcon from '@material-ui/icons/Add';
-import Typography from '@material-ui/core/Typography';
-import blue from '@material-ui/core/colors/blue';
-import IconButton from '../Components/iconButton';
-import Hamburger from '../Components/Icon/hamburger'
+import TextField from '../Components/TextField';
+import Button from '../Components/Button';
 
-const emails = ['username@gmail.com', 'user02@gmail.com'];
-const styles = {
-  avatar: {
-    backgroundColor: blue[100],
-    color: blue[600],
-  },
-};
 
-class SimpleDialog extends React.Component {
-  handleClose = () => {
-    this.props.onClose(this.props.selectedValue);
-  };
-
-  handleListItemClick = value => {
-    this.props.onClose(value);
-  };
-
-  render() {
-    const { classes, onClose, selectedValue, ...other } = this.props;
-
-    return (
-      <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
-        <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
-        <div>
-          <List>
-            {emails.map(email => (
-              <ListItem button onClick={() => this.handleListItemClick(email)} key={email}>
-                <ListItemAvatar>
-                  <Avatar className={classes.avatar}>
-                    <PersonIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={email} />
-              </ListItem>
-            ))}
-            <ListItem button onClick={() => this.handleListItemClick('addAccount')}>
-              <ListItemAvatar>
-                <Avatar>
-                  <AddIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="add account" />
-            </ListItem>
-          </List>
-        </div>
-      </Dialog>
-
-    );
-  }
-}
-
-SimpleDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onClose: PropTypes.func,
-  selectedValue: PropTypes.string,
-};
-
-const SimpleDialogWrapped = withStyles(styles)(SimpleDialog);
 
 class Home extends React.Component {
-  state = {
-    open: false,
-    selectedValue: emails[1],
-  };
 
-  handleClickOpen = () => {
-    this.setState({
-      open: true,
-    });
-  };
 
-  handleClose = value => {
-    this.setState({ selectedValue: value, open: false });
-  };
+handleChange=(e)=>{
+
+}
 
   render() {
     return (
       <div>
-        <IconButton>
-          <Hamburger color="black"/>
-        </IconButton>
-                <Typography variant="subheading">Selected: {this.state.selectedValue}</Typography>
-        <br />
-        <Button onClick={this.handleClickOpen}>Open simple dialog in Home</Button>
-        <SimpleDialogWrapped
-          selectedValue={this.state.selectedValue}
-          open={this.state.open}
-          onClose={this.handleClose}
-        />
+      home
+      <TextField id="test" label="textarea" rows="1" placeholder="with Place holder" multiline/>
+      <TextField id="test1" label="testing"  type="text" placeholder="text"/>
+    <TextField id="test1" label="select" placeholder="textarea" onChange={this.handleChange} select>
+        <option value="4">test1</option>
+      <option value="2">test2</option>
+      </TextField>
+      <br />
+    <Button size="1.5rem" outlined>test</Button>
+    <Button size="1.5rem" outlined raised>test</Button>
+  <Button size="1.4rem" primary>test</Button>
+<Button size="1.4rem" primary raised>test</Button>
+<Button size="1.3rem" primary rounded>test</Button>
+<Button size="1.2rem" raise>test</Button>
+<Button size="1.2rem" rounded>test</Button>
+<Button size="1.2rem" rounded raised>test</Button>
+<Button size="1rem">test</Button>
+
       </div>
     );
   }

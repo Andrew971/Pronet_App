@@ -77,14 +77,7 @@ position: absolute;
 `;
 
 class Checkbox extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isChecked : false
-    };
-    this.checkbox = React.createRef();
-  }
-  click = () => this.setState(prevState => {return {isChecked:!prevState.isChecked}})
+
 
   render() {
     const {checked,indeterminate} = this.props

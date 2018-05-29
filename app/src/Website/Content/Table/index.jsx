@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {PureComponent,Fragment} from 'react';
 import Table from '../../../Components/Table/Table';
 import TableBody from '../../../Components/Table/TableBody';
 import TableCell from '../../../Components/Table/TableCell';
@@ -9,30 +9,26 @@ import Overflow from '../../../Components/overflow';
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
 
-class TableContent extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {};
-  }
-  test = () => console.log('ok');
+
+class TableContent extends PureComponent {
+
   isSelected = id => this.props.selected.indexOf(id) !== -1;
 
   render() {
-    const {handleClick, onSelectAllClick, numSelected, data, rowCount,page,rowsPerPage} = this.props
-
+    const {handleClick, onSelectAllClick, numSelected, data, rowCount,page,rowsPerPage,match,history} = this.props
     return (<Fragment>
       <Overflow axeX>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell onChange={onSelectAllClick}>
-                <Checkbox  indeterminate={numSelected > 0 && numSelected < rowCount}  checked={numSelected === rowCount} />
+                <Checkbox  indeterminate={numSelected > 0 && numSelected < rowCount}  checked={numSelected} />
               </TableCell>
-              <TableCell first="first">Col 1</TableCell>
-              <TableCell>col 2</TableCell>
-              <TableCell>Fat (g)</TableCell>
-              <TableCell>Carbs (g)</TableCell>
-              <TableCell>Protein (g)</TableCell>
+              <TableCell first="first">Name</TableCell>
+              <TableCell>description</TableCell>
+              <TableCell>Contenu</TableCell>
+              <TableCell>Crée le</TableCell>
+              <TableCell>Modifié le</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -40,17 +36,17 @@ class TableContent extends React.Component {
               data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
                 const isSelected = this.isSelected(n.id);
 
-                return (<TableRow onClick={() => handleClick(n.id)} key={n.id} hover="hover">
-                  <TableCell>
+                return (<TableRow key={n.id} hover="hover">
+                  <TableCell onClick={() => handleClick(n.id)}>
                     <Checkbox checked={isSelected}/>
                   </TableCell>
-                  <TableCell first="first">
+                  <TableCell onClick={() => history.push(`${match.url}/${n.name}`)} first="first">
                     {n.name}
                   </TableCell>
-                  <TableCell>{n.calories}</TableCell>
-                  <TableCell>{n.fat}</TableCell>
-                  <TableCell>{n.carbs}</TableCell>
-                  <TableCell>{n.protein}</TableCell>
+                  <TableCell>{n.description}</TableCell>
+                  <TableCell>{n.field.length}</TableCell>
+                  <TableCell>{n.created_at}</TableCell>
+                  <TableCell>{n.updated_at}</TableCell>
                 </TableRow>);
               })
             }

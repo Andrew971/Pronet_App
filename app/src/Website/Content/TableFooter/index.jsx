@@ -4,11 +4,7 @@ import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
 
 class TableFooter extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {};
-  }
-
+  
 
   render() {
     const {rowsPerPage, page, data,handleChangePage,handleChangeRowsPerPage} = this.props

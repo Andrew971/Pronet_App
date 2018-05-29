@@ -16,6 +16,7 @@ export const Paths = {
   website: 'website',
   WebContent: 'website/content',
   websiteContent: (base) => `${base}/content`,
+  websiteSingleContent: (base) => `${base}/content/:id`,
   createPath: (base, path) => {
     return `${base}/${path}`
   }

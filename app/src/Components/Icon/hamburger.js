@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import styled, {css,keyframes} from "styled-components"
 const Spine = keyframes `
   100% {
-    transform: rotate(360deg);
+    transform: rotate(180deg);
   }
 }
 `;
@@ -35,7 +35,7 @@ max-width: 100%;
     transition: 0.4s;
 }
 &:hover{
-  animation: ${Spine} 1s linear 1;
+  animation: ${Spine} 250ms linear 1;
 
 }
  ${props => (

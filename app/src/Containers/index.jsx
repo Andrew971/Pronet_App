@@ -4,26 +4,29 @@ import './styles.css'
 import NavContainer from './nav';
 import Main from './main';
 import Swipe from '../Components/Swipe';
-
+import {ThemeProvider} from 'styled-components';
 
 class Containers extends Component {
 
 
 
   render() {
-
-    return (<Swipe>
+const { Theme } = this.props
+    return (
+      <ThemeProvider theme={Theme}>
+      <Swipe>
       <NavContainer/>
       <Main/>
 
-    </Swipe>);
+    </Swipe>
+    </ThemeProvider>
+  );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    menuDisplay: state.AppBar.menuDisplay,
-    RightDrawerDisplay: state.AppBar.RightDrawerDisplay
+    Theme:state.UI.Theme
   };
 };
 

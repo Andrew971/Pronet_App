@@ -4,7 +4,7 @@ import { all } from 'redux-saga/effects';
 
 //List of Reducer
 import {UIReducer} from '../Containers/reducer';
-import {Reducer} from '../Website/reducer';
+import {WebsiteReducer} from '../Website/reducer';
 import {AppBarReducer} from '../AppBar/reducer';
 
 
@@ -18,7 +18,7 @@ import {Watcher} from '../Website/saga';
 export function rootReducer(asyncReducers) {
   return combineReducers({
       UI: UIReducer,
-      state: Reducer,
+      Website: WebsiteReducer,
       AppBar:AppBarReducer,
       ...asyncReducers
   });
