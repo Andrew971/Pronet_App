@@ -285,7 +285,7 @@ class TextField extends PureComponent {
 
     return (<Container id={id} value={SelectValue}>
       {type && <InputField type={type} label={label} id={id} name={name} placeholder={placeholder}/>}
-
+      
       {multiline && <TextAreaField type={type} label={label} id={id} name={name} placeholder={placeholder} rows={rows}/>}
 
       {select && <SelectField type={type} label={label} id={id} name={name} placeholder={placeholder} rows={rows} children={children} onChange={onChange} value={SelectValue} />}

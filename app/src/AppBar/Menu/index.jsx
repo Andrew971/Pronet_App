@@ -2,7 +2,7 @@ import React, { Component,Fragment } from 'react';
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
 import Drawer from '../../Components/Drawer/Drawer'
-import Menu from '../../Components/Drawer/Content'
+import DrawerContent from '../../Components/Drawer/Content'
 import MenuItems from '../../Components/Drawer/MenuItems'
 import MenuTypo from '../../Components/Drawer/MenuTypo'
 import {Nav} from '../../js/constants';
@@ -24,7 +24,7 @@ export class MenuContainer extends Component {
     const { showSubMenu } = this.state
     return (
       <Drawer isOpen={drawerLeftDisplay}>
-<Menu>
+<DrawerContent>
   {Nav.map(item=>
     <Fragment key={item.key}>
     <MenuItems onClick={()=>{
@@ -54,7 +54,7 @@ export class MenuContainer extends Component {
   )}
 
 
-</Menu>
+</DrawerContent>
 
 
 </Drawer>

@@ -9,11 +9,11 @@ import Portal from "../js/portal";
 import NewContent from "./Content/NewContent";
 
 class Website extends Component {
-  componentDidMount() {
-    navigator.geolocation.watchPosition(position=>{
-      console.log(position);
-    })
-  }
+  // componentDidMount() {
+  //   navigator.geolocation.watchPosition(position=>{
+  //     console.log(position);
+  //   })
+  // }
   render() {
     const {match} = this.props;
     const {modalDisplay} = this.props;

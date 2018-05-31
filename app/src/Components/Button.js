@@ -63,8 +63,8 @@ class Button extends PureComponent {
 
 
   render() {
-    const {children,primary,raised,rounded,size, outlined} = this.props;
-    return (<StyledButton primary={primary} raised={raised} rounded={rounded} size={size} outlined={outlined}>
+    const {children,primary,raised,rounded,size, outlined ,onClick} = this.props;
+    return (<StyledButton primary={primary} raised={raised} rounded={rounded} size={size} outlined={outlined} onClick={onClick}>
       {children}
       </StyledButton>)
   }

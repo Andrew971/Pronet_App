@@ -9,12 +9,17 @@ import ModalFooter from "../../../Components/Modal/ModalFooter";
 import ModalButton from "../../../Components/Modal/ModalButton";
 // import ModalError from '../../../Components/Modal/ModalError'
 import ModalConfirm from "../../../Components/Modal/ModalConfirm";
-import base from '../../../js/firebase'
-import TextField from '../../../Components/TextField';
+import base from "../../../js/firebase";
+import {storage} from "../../../js/firebase";
+import TextField from "../../../Components/TextField";
 
 function formatDate(date) {
-
-    return date.toLocaleDateString([], { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  return date.toLocaleDateString([], {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
 }
 
 export const ContactFr = ({
@@ -30,144 +35,239 @@ export const ContactFr = ({
   deleteField,
   addField,
   sendContent,
-  onChange
-}) => (<ModalWrapper>
-  <ModalClose onClick={() => {
-      dispatch({type: "MODAL_HIDE", payload: false});
-    }}>
-    &times;
-  </ModalClose>
-  <ModalContent>
-    <ModalHeader>
-      <h5>J'ai besoin d'un site internet?</h5>
-    </ModalHeader>
+  onChange,
+  onUpload
+}) => (
+  <ModalWrapper>
+    <ModalClose
+      onClick={() => {
+        dispatch({type: "MODAL_HIDE", payload: false});
+      }}
+    >
+      &times;
+    </ModalClose>
+    <ModalContent>
+      <ModalHeader>
+        <h5>J'ai besoin d'un site internet?</h5>
+      </ModalHeader>
 
-  <TextField  label="Nom" onChange={showContentType} select>
-      <option value="none">Choose</option>
-      {
-        contentType.map((type, n) => (<option value={type.name} key={n}>
-          {type.name}
-        </option>))
-      }
-    </TextField>
-    <br/>
-    <form ref={self => (this.contentForm = self)} onChange={onChange}>
-      {
-        content && content.field.map((field, fieldIndex) => (<Fragment key={field.id}>
-          <TextField type="text" label="Name" name={["field", "name"]} placeholder={field.name} id={[fieldIndex]}/>
-          <TextField label="Description" rows="1" name={["field", "description"]} id={[fieldIndex]} placeholder={field.description} multiline/>
-        <TextField label="Page" name={["field", "page"]} id={[fieldIndex]} select>
-            {
-              websitePage.map((page, n) => (<option value={page} key={n}>
-                {page}
-              </option>))
-            }
-          </TextField>
-          <br/> {
-            field.option && field.option.map((option, optionIndex) => (<Fragment key={option.id}>
-              <br/>
-              <label>{option.name}</label>
-              <br/>
-              <label>{option.description}</label>
-              <br/> {
-                option.field.map((optionField, optionfieldIndex) => (<Fragment key={optionField.id}>
-                  {
-                    optionField.name && (<Fragment>
+      <TextField label="Nom" onChange={showContentType} select>
+        <option value="none">Choose</option>
+        {contentType.map((type, n) => (
+          <option value={type.name} key={n}>
+            {type.name}
+          </option>
+        ))}
+      </TextField>
+      <br />
+      <form ref={self => (this.contentForm = self)} onChange={onChange}>
+        {content &&
+          content.field.map((field, fieldIndex) => (
+            <Fragment key={field.id}>
+              <TextField
+                type="text"
+                label="Name"
+                name={["field", "name"]}
+                placeholder={field.name}
+                id={[fieldIndex]}
+              />
+              <TextField
+                label="Description"
+                rows="1"
+                name={["field", "description"]}
+                id={[fieldIndex]}
+                placeholder={field.description}
+                multiline
+              />
+              <TextField
+                label="Page"
+                name={["field", "page"]}
+                id={[fieldIndex]}
+                select
+              >
+                {websitePage.map((page, n) => (
+                  <option value={page} key={n}>
+                    {page}
+                  </option>
+                ))}
+              </TextField>
+              <br />{" "}
+              {field.option &&
+                field.option.map((option, optionIndex) => (
+                  <Fragment key={option.id}>
+                    <br />
+                    <label>{option.name}</label>
+                    <br />
+                    <label>{option.description}</label>
+                    <br />{" "}
+                    {option.field.map((optionField, optionfieldIndex) => (
+                      <Fragment key={optionField.id}>
+                        {optionField.name && (
+                          <Fragment>
+                            <TextField
+                              label="Name"
+                              type="text"
+                              placeholder=""
+                              name={["option", "name"]}
+                              id={[fieldIndex, optionIndex, optionfieldIndex]}
+                            />
+                          </Fragment>
+                        )}
+                        {optionField.text && (
+                          <Fragment>
+                            <TextField
+                              label="text"
+                              type="text"
+                              name={["option", "text"]}
+                              id={[fieldIndex, optionIndex, optionfieldIndex]}
+                              placeholder=""
+                            />
+                          </Fragment>
+                        )}
 
-                    <TextField label="Name" type="text" placeholder="" name={["option", "name"]} id={[fieldIndex, optionIndex, optionfieldIndex]}/>
-                    </Fragment>)
-                  }
-                  {
-                    optionField.text && (<Fragment>
+                        {optionField.url && (
+                          <Fragment>
+                            <TextField
+                              label="Url"
+                              type="text"
+                              name={["option", "url"]}
+                              id={[fieldIndex, optionIndex, optionfieldIndex]}
+                              placeholder=""
+                            />
+                          </Fragment>
+                        )}
+                        {optionField.path && (
+                          <Fragment>
+                            <input
+                              label="Path"
+                              type="file"
+                              name={["option", "path"]}
+                              id={[fieldIndex, optionIndex, optionfieldIndex]}
+                              placeholder=""
+                              onChange={onUpload}
+                            />
+                          </Fragment>
+                        )}
+                        {optionField.color && (
+                          <Fragment>
+                            <TextField
+                              label="Color"
+                              type="text"
+                              name={["option", "color"]}
+                              id={[fieldIndex, optionIndex, optionfieldIndex]}
+                              placeholder=""
+                            />
+                          </Fragment>
+                        )}
+                        {optionField.paragraph && (
+                          <Fragment>
+                            <TextField
+                              label="Paragraph"
+                              rows="1"
+                              name={["option", "paragraph"]}
+                              id={[fieldIndex, optionIndex, optionfieldIndex]}
+                              placeholder=""
+                              multiline
+                            />
+                          </Fragment>
+                        )}
 
-                    <TextField label="text" type="text" name={["option", "text"]} id={[fieldIndex, optionIndex, optionfieldIndex]} placeholder=""/>
-                    </Fragment>
-                  )
-                  }
+                        <Fragment>
+                          <TextField
+                            label="Order"
+                            type="number"
+                            name={["option", "order"]}
+                            id={[fieldIndex, optionIndex, optionfieldIndex]}
+                            placeholder=""
+                            defaultValue={optionField.order}
+                          />
+                        </Fragment>
 
-                  {
-                    optionField.url && (<Fragment>
-                    <TextField label="Url" type="text" name={["option", "url"]} id={[fieldIndex, optionIndex, optionfieldIndex]} placeholder=""/>
-                    </Fragment>)
-                  }
-                  {
-                    optionField.path && (<Fragment>
-                    <TextField label="Path" type="text" name={["option", "path"]} id={[fieldIndex, optionIndex, optionfieldIndex]} placeholder=""/>
-                    </Fragment>)
-                  }
-                  {
-                    optionField.color && (<Fragment>
-                    <TextField label="Color" type="text" name={["option", "color"]} id={[fieldIndex, optionIndex, optionfieldIndex]} placeholder=""/>
-                    </Fragment>)
-                  }
-                  {
-                    optionField.paragraph && (<Fragment>
-                    <TextField label="Paragraph" rows="1" name={["option", "paragraph"]} id={[fieldIndex, optionIndex, optionfieldIndex]} placeholder="" multiline/>
-                    </Fragment>)
-                  }
-
-                  <Fragment>
-                  <TextField label="Order" type="number" name={["option", "order"]} id={[fieldIndex, optionIndex, optionfieldIndex]} placeholder="" defaultValue={optionField.order}/>
+                        <br />
+                        <button
+                          type="button"
+                          onClick={() =>
+                            deleteOptionField(
+                              fieldIndex,
+                              optionIndex,
+                              optionfieldIndex,
+                              optionField.id
+                            )
+                          }
+                        >
+                          Delete Option Field
+                        </button>
+                        <br />
+                      </Fragment>
+                    ))}
+                    <br />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        deleteOption(fieldIndex, option.id, optionIndex)
+                      }
+                    >
+                      Delete Option
+                    </button>
+                    <br />
                   </Fragment>
-
-                  <br/>
-                  <button type="button" onClick={() => deleteOptionField(fieldIndex, optionIndex, optionfieldIndex, optionField.id)}>
-                    Delete Option Field
-                  </button>
-                  <br/>
-                </Fragment>))
-              }
-              <br/>
-              <button type="button" onClick={() => deleteOption(fieldIndex, option.id, optionIndex)}>
-                Delete Option
+                ))}
+              <br />{" "}
+              {content &&
+                contentOption.map((option, n) => (
+                  <Fragment key={n}>
+                    <button
+                      type="button"
+                      onClick={() => addOption(option.name, fieldIndex)}
+                    >
+                      {option.name}
+                    </button>
+                  </Fragment>
+                ))}
+              <br />{" "}
+              {content.field.length > 1 && (
+                <button type="button" onClick={() => deleteField(field.id)}>
+                  Delete Field
+                </button>
+              )}
+              <button type="button" onClick={() => addField()}>
+                Add Field
               </button>
-              <br/>
-            </Fragment>))
-          }
-          <br/> {
-            content && contentOption.map((option, n) => (<Fragment key={n}>
-              <button type="button" onClick={() => addOption(option.name, fieldIndex)}>
-                {option.name}
-              </button>
-            </Fragment>))
-          }
-          <br/> {
-            content.field.length > 1 && (<button type="button" onClick={() => deleteField(field.id)}>
-              Delete Field
-            </button>)
-          }
-          <button type="button" onClick={() => addField()}>
-            Add Field
+              <br />
+            </Fragment>
+          ))}
+      </form>
+      <ModalFooter>
+        {content && (
+          <button type="button" onClick={() => sendContent(this.contentForm)}>
+            send
           </button>
-          <br/>
-        </Fragment>))
-      }
-    </form>
-    <ModalFooter>
-    {
-     content &&  <button type="button" onClick={() => sendContent(this.contentForm)}>
-        send
-      </button>}
-    </ModalFooter>
-  </ModalContent>
-</ModalWrapper>);
+        )}
+      </ModalFooter>
+    </ModalContent>
+  </ModalWrapper>
+);
 
-export const Confirmation = ({dispatch}) => (<ModalWrapper>
-  <ModalContent>
-    <ModalConfirm>
-      Félicitation ! Nous avons envoyé votre email avec succés.
-      <p>Je vous recontacterai sous 48h.</p>
-      <p>Merci.</p>
-    </ModalConfirm>
-    <div className="col-12" align="center">
-      <ModalButton onClick={() => {
-          dispatch({type: "MODAL_HIDE", payload: false});
-        }}>
-        &times; Fermer
-      </ModalButton>
-    </div>
-  </ModalContent>
-</ModalWrapper>);
+export const Confirmation = ({dispatch}) => (
+  <ModalWrapper>
+    <ModalContent>
+      <ModalConfirm>
+        Félicitation ! Nous avons envoyé votre email avec succés.
+        <p>Je vous recontacterai sous 48h.</p>
+        <p>Merci.</p>
+      </ModalConfirm>
+      <div className="col-12" align="center">
+        <ModalButton
+          onClick={() => {
+            dispatch({type: "MODAL_HIDE", payload: false});
+          }}
+        >
+          &times; Fermer
+        </ModalButton>
+      </div>
+    </ModalContent>
+  </ModalWrapper>
+);
 
 class ModalFr extends PureComponent {
   constructor(props) {
@@ -176,23 +276,24 @@ class ModalFr extends PureComponent {
       content: null,
       contentType: [],
       contentOption: [],
-      websitePage: []
+      websitePage: [],
+      progress: 0
     };
   }
   componentWillMount() {
-    base.syncState('contentType', {
+    base.syncState("contentType", {
       context: this,
-      state: 'contentType',
+      state: "contentType",
       asArray: true
     });
-    base.syncState('contentOption', {
+    base.syncState("contentOption", {
       context: this,
-      state: 'contentOption',
+      state: "contentOption",
       asArray: true
     });
-    base.syncState('websitePage', {
+    base.syncState("websitePage", {
       context: this,
-      state: 'websitePage',
+      state: "websitePage",
       asArray: true
     });
   }
@@ -237,12 +338,10 @@ class ModalFr extends PureComponent {
     newChoice.field[0].id = Date.now();
     newChoice.field[0].created_at = formatDate(new Date());
     newChoice.field[0].updated_at = formatDate(new Date());
-    const root = newContent.field[fieldIndex].option
-    const index = (root)
-      ? root.findIndex(x => x.name === newChoice.name)
-      : null;
+    const root = newContent.field[fieldIndex].option;
+    const index = root ? root.findIndex(x => x.name === newChoice.name) : null;
     if (index === null) {
-      newContent.field[fieldIndex]['option'] = []
+      newContent.field[fieldIndex]["option"] = [];
       newContent.field[fieldIndex].option.push(newChoice);
       this.setState({content: newContent});
     } else if (index === -1) {
@@ -258,15 +357,22 @@ class ModalFr extends PureComponent {
   deleteOption = (fieldIndex, optionId, optionIndex) => {
     const {content} = this.state;
     const newContent = JSON.parse(JSON.stringify(content));
-    let filter = newContent.field[fieldIndex].option.filter(option => option.id !== optionId);
+    let filter = newContent.field[fieldIndex].option.filter(
+      option => option.id !== optionId
+    );
     newContent.field[fieldIndex].option = filter;
     this.setState({content: newContent});
   };
 
-  deleteOptionField = (fieldIndex, optionIndex, optionfieldIndex, optionFieldId) => {
+  deleteOptionField = (
+    fieldIndex,
+    optionIndex,
+    optionfieldIndex,
+    optionFieldId
+  ) => {
     const {content} = this.state;
     const newContent = JSON.parse(JSON.stringify(content));
-    const root = newContent.field[fieldIndex].option[optionIndex].field
+    const root = newContent.field[fieldIndex].option[optionIndex].field;
     let filter = root.filter(field => field.id !== optionFieldId);
     newContent.field[fieldIndex].option[optionIndex].field = filter;
     this.setState({content: newContent});
@@ -283,45 +389,108 @@ class ModalFr extends PureComponent {
     this.setState({content: deleteField});
   };
 
-  onChange = (e) => {
+  onChange = e => {
     const {content} = this.state;
     const newContent = JSON.parse(JSON.stringify(content));
-    const {name, id, value} = e.target
-    let nameArray = name.split(",")
-    let newId = id.split(",").map(Number)
-      if (nameArray[0] === "field") {
-        newContent.field[newId[0]][nameArray[1]] = value
+    const {name, id, value, type, files} = e.target;
+    let nameArray = name.split(",");
+    let newId = id.split(",").map(Number);
+
+    if (nameArray[0] === "field") {
+      newContent.field[newId[0]][nameArray[1]] = value;
+    }
+    if (nameArray[0] === "option") {
+      if (type !== "file") {
+        newContent.field[newId[0]].option[newId[1]].field[newId[2]][
+          nameArray[1]
+        ] = value;
+      } else {
+        const metadata = {
+          contentType: files[0].type
+        };
+        const storageRef = storage.ref();
+        let task = storageRef
+          .child("website/images/" + files[0].name)
+          .put(files[0], metadata);
+        task.on(
+          "state_changed",
+          snapshot => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              this.setState({progress: progress});
+          },
+          err => console.log(err),
+          () => {
+            let url = task.snapshot.downloadURL;
+            console.log("the downUl is " + url);
+            newContent.field[newId[0]].option[newId[1]].field[newId[2]][
+              nameArray[1]
+            ] = url;
+          }
+        );
       }
-      if (nameArray[0] === "option") {
-        newContent.field[newId[0]].option[newId[1]].field[newId[2]][nameArray[1]] = value
-      }
+    }
+    console.log(newContent);
     this.setState({content: newContent});
+  };
 
-  }
+  onUpload = e => {
+    // const {content} = this.state;
+    // const newContent = JSON.parse(JSON.stringify(content));
+    // const {name, id, value, files} = e.target;
+    // let nameArray = name.split(",");
+    // let newId = id.split(",").map(Number);
+    // console.log(files);
+    // console.log(value);
+    // console.log(name);
+    // console.log(id);
+  };
 
-  sendContent = (form) => {
-    const {dispatch} = this.props
+  sendContent = form => {
+    const {dispatch} = this.props;
     const {content} = this.state;
     dispatch({
-      type: 'NEW_CONTENT_REQUESTED',
+      type: "NEW_CONTENT_REQUESTED",
       payload: {
         content: content.name,
         body: content
       }
-    })
-
+    });
   };
   render() {
     const {Modal, dispatch} = this.props;
     const {content, contentType, contentOption, websitePage} = this.state;
+    console.log(this.state.progress);
 
     switch (Modal) {
       case "Contact":
-        return (<ContactFr dispatch={dispatch} showContentType={this.showContentType}/>);
+        return (
+          <ContactFr
+            dispatch={dispatch}
+            showContentType={this.showContentType}
+          />
+        );
       case "Confirmation":
-        return <Confirmation dispatch={dispatch}/>;
+        return <Confirmation dispatch={dispatch} />;
       default:
-        return (<ContactFr contentType={contentType} contentOption={contentOption} websitePage={websitePage} dispatch={dispatch} showContentType={this.showContentType} content={content} addField={this.addField} addOption={this.addOption} deleteOption={this.deleteOption} deleteOptionField={this.deleteOptionField} deleteField={this.deleteField} sendContent={this.sendContent} onChange={this.onChange}/>);
+        return (
+          <ContactFr
+            contentType={contentType}
+            contentOption={contentOption}
+            websitePage={websitePage}
+            dispatch={dispatch}
+            showContentType={this.showContentType}
+            content={content}
+            addField={this.addField}
+            addOption={this.addOption}
+            deleteOption={this.deleteOption}
+            deleteOptionField={this.deleteOptionField}
+            deleteField={this.deleteField}
+            sendContent={this.sendContent}
+            onChange={this.onChange}
+            onUpload={this.onUpload}
+          />
+        );
     }
   }
 }

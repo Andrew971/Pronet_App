@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styled from "styled-components";
 
 const Container = styled.div`
+overflow: hidden; /* Enable scroll if needed */
 
 
 
@@ -24,6 +25,7 @@ const Container = styled.div`
     componentDidMount = () => {
       window.addEventListener("touchstart", this.touchstart);
       window.addEventListener("touchmove", this.touchmove);
+      window.addEventListener("touchmove", this.slideDrawer);
       window.addEventListener("touchend", this.touchend);
 
     }
@@ -98,8 +100,13 @@ const Container = styled.div`
       // console.log('tap:' + tap);
       // console.log('swipX:' + swipY, 'swipY:' + swipY);
 
+
     }
 
+    slideDrawer = e =>{
+      let moveX = e.changedTouches[0].clientX;
+      console.log(moveX);
+    }
     render() {
       const {drawerDisplay, children} = this.props
 

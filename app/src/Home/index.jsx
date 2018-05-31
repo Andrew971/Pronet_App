@@ -8,7 +8,7 @@ class Home extends React.Component {
 
 
 handleChange=(e)=>{
-
+console.log(e.target.files);
 }
 
   render() {
@@ -31,6 +31,8 @@ handleChange=(e)=>{
 <Button size="1.2rem" rounded>test</Button>
 <Button size="1.2rem" rounded raised>test</Button>
 <Button size="1rem">test</Button>
+<br />
+<input id="test1" label="testing"  type="file" placeholder="text" onChange={e=> this.handleChange(e)}/>
 
       </div>
     );
